@@ -82,6 +82,7 @@
             <th scope="col">content</th>
             <th scope="col">Created</th>
             <th scope="col">Due Date</th>
+            <th scope="col">Image</th>
         </tr>
         </thead>
         <tbody>
@@ -90,16 +91,19 @@
                 <td colspan="5"><h5 class="text-primary">Hiện tại chưa có task nào được tạo!</h5></td>
             </tr>
             @else
-            @foreach($tasks as $task)
+            @foreach($tasks as $key => $task)
                 <tr>
-            <td scope="row">{{$task->id}}</td>
-            <td>{{$task->title}}</td>
-            <td>{{$task->content}}</td>
-            <td>{{$task->created_at}}</td>
-            <td>{{$task->updated_at}}</td>
+                    <th scope="row">{{ ++$key }}</th>
+                    <td>{{ $task->title }}</td>
+                    <td>{{ $task->content }}</td>
+                    <td>{{ $task->created_at }}</td>
+                    <td>{{ $task->due_date }}</td>
+                    <td>
+                        <img src="{{ asset('storage/images/' . $task->image) }}" alt="" style="width: 150px">
+                    </td>
                 </tr>
             @endforeach
-            @endif
+        @endif
         </tbody>
     </table>
     @endif
